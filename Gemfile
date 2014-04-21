@@ -8,12 +8,6 @@ gem 'therubyracer', :platforms => :ruby
 gem 'puma', :platforms => :ruby
 gem 'turbo-sprockets-rails3'
 
-# gem 'rack-fiber_pool' # event based investigation
-# gem 'eventmachine'
-# gem 'thin'
-# gem "em-synchrony"
-# gem 'websocket-rails' # for async comms with JS, needs event based server
-
 platform :rbx do
   gem "racc", "1.4.9"
   gem "rubysl"
@@ -22,18 +16,7 @@ platform :rbx do
   gem "newrelic_rpm"
 end
 
-# gem 'actionmailer' 
-# gem 'activerecord' 
-# gem "rails", "~> 3.2.17"
-
 gem 'enumerations_mixin', :git => 'git://github.com/balen/enumerations_mixin.git'
-
-# gem 'rack-jsonp-middleware', :require => 'rack/jsonp'
-# gem 'yajl-ruby'
-
-# 
-# gem "browser"
-# 
 
 # gem 'rack-mini-profiler'
 # gem 'flamegraph'
@@ -45,10 +28,11 @@ gem 'i18n-active_record',
       :require => 'i18n/active_record'
 gem 'interpret'
 
-# # For locale in the route
+# For locale in the route
 # gem 'routing-filter'
 
-gem 'planner-core', path: "/Users/balen/workspaces/grenadine/planner-core"
+gem 'planner-core', :git => 'git://git.code.sf.net/p/conferenceplan/planner-core'
+#path: "/Users/balen/Projects/planner-core"
 
 # Needed for the new asset pipeline
 group :assets do
@@ -65,9 +49,4 @@ group :development do
   gem 'seed_dump', '0.5.3'
   gem 'capistrano', '2.15.5'
   gem 'rvm-capistrano', '1.5.0'
-
-  #gem 'capistrano-puma', '0.0.1', require: false, group: :development
-  #gem 'capistrano', '~> 3.0', require: false, group: :development
-  #gem 'capistrano-rails', require: false, group: :development
-  #gem 'capistrano-bundler', require: false, group: :development
 end

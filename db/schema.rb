@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140314200859) do
+ActiveRecord::Schema.define(:version => 20140419154915) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
     t.string   "addressable_type"
     t.integer  "person_id"
     t.boolean  "isvalid"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
   end
 
@@ -31,8 +31,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "Survey_id"
     t.string   "question"
     t.text     "reply"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -44,14 +44,15 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "username"
     t.string   "action"
     t.text     "audited_changes"
-    t.integer  "version",          :default => 0
+    t.integer  "version",         :default => 0
     t.datetime "created_at"
     t.string   "comment"
     t.string   "remote_address"
-    t.integer  "association_id"
-    t.string   "association_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
   end
 
+  add_index "audits", ["associated_id", "associated_type"], :name => "associated_index"
   add_index "audits", ["auditable_id", "auditable_type"], :name => "auditable_index"
   add_index "audits", ["created_at"], :name => "index_audits_on_created_at"
   add_index "audits", ["user_id", "user_type"], :name => "user_index"
@@ -60,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "person_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -79,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "description"
     t.string   "type"
     t.string   "old_value"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cloudinary_configs", :force => true do |t|
@@ -93,11 +94,35 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.datetime "updated_at",           :null => false
   end
 
+  create_table "conference_directories", :force => true do |t|
+    t.string   "name"
+    t.string   "code",         :limit => 10
+    t.string   "endpoint",     :limit => 300
+    t.string   "description",  :limit => 2000
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+    t.integer  "lock_version",                 :default => 0
+  end
+
+  create_table "conference_logos", :force => true do |t|
+    t.string   "image"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
+  end
+
   create_table "datasources", :force => true do |t|
     t.string   "name"
     t.boolean  "primary",    :default => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "default_bio_images", :force => true do |t|
+    t.string   "image"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -109,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.datetime "locked_at"
     t.datetime "failed_at"
     t.string   "locked_by"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "queue"
   end
 
@@ -119,8 +144,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "edited_bios", :force => true do |t|
     t.text     "bio"
     t.integer  "person_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
     t.text     "website"
     t.text     "twitterinfo"
@@ -132,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "email_addresses", :force => true do |t|
     t.string   "email",        :default => ""
     t.boolean  "isdefault"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -145,24 +170,24 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
 
   create_table "equipment", :force => true do |t|
     t.string   "details"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "equipment_type_id"
     t.integer  "room_id"
   end
 
   create_table "equipment_assignments", :force => true do |t|
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "programme_item_id"
     t.integer  "equipment_id"
   end
 
   create_table "equipment_needs", :force => true do |t|
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "programme_item_id"
     t.integer  "equipment_type_id"
     t.integer  "lock_version",      :default => 0
@@ -172,15 +197,15 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
 
   create_table "equipment_types", :force => true do |t|
     t.string   "description"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
   create_table "excluded_items_survey_maps", :force => true do |t|
     t.integer  "programme_item_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "survey_answer_id"
   end
@@ -188,8 +213,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "excluded_periods_survey_maps", :force => true do |t|
     t.integer  "period_id"
     t.string   "period_type"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
     t.integer  "survey_answer_id"
   end
@@ -198,8 +223,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "excludable_id"
     t.string   "excludable_type"
     t.integer  "person_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",    :default => 0
     t.text     "source"
   end
@@ -217,8 +242,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "formats", :force => true do |t|
     t.string   "name"
     t.integer  "position"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -249,9 +274,16 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "invitation_categories", :force => true do |t|
     t.string   "name"
     t.integer  "position"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
+  end
+
+  create_table "job_infos", :force => true do |t|
+    t.datetime "last_run"
+    t.string   "job_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "label_dimensions", :force => true do |t|
@@ -279,8 +311,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "cc",              :default => ""
     t.string   "from",            :default => ""
     t.string   "domain",          :default => ""
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "info"
     t.string   "test_email"
   end
@@ -292,8 +324,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "email"
     t.text     "content"
     t.boolean  "testrun",                      :default => false
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",                 :default => 0
     t.integer  "person_id"
     t.integer  "mailing_id"
@@ -305,8 +337,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "subject",                    :default => ""
     t.text     "content"
     t.integer  "survey_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",               :default => 0
     t.integer  "transiton_invite_status_id"
   end
@@ -316,8 +348,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "mail_template_id"
     t.boolean  "scheduled"
     t.boolean  "testrun",          :default => false
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
   end
 
@@ -325,23 +357,33 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.text     "question"
     t.text     "code"
     t.text     "name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "lock_version", :default => 0
+  end
+
+  create_table "menu_items", :force => true do |t|
+    t.string   "name",         :default => ""
+    t.string   "path",         :default => "/"
+    t.integer  "menu_id"
+    t.integer  "menu_item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
   create_table "menus", :force => true do |t|
     t.string   "title",        :default => ""
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
   create_table "messages", :force => true do |t|
     t.integer  "user_id"
     t.text     "message"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "mobile_pages", :force => true do |t|
@@ -382,7 +424,11 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "page_flipper_selection_bar", :default => "rgba(184,182,182,1)"
     t.string   "updated_ribbon_text",        :default => "rgba(184,182,182,1)"
     t.string   "item_format",                :default => "rgba(184,182,182,1)"
-    t.string   "default_bio_image"
+    t.string   "menu_drawer_bg",             :default => "rgba(239,239,239,1)"
+    t.string   "menu_drawer_selected",       :default => "rgba(0,173,329,1)"
+    t.string   "menu_drawer_text",           :default => "rgba(35,31,32,1)"
+    t.string   "name"
+    t.boolean  "isdefault",                  :default => false
   end
 
   create_table "pending_import_people", :force => true do |t|
@@ -400,8 +446,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "email",                            :default => ""
     t.string   "registration_number"
     t.string   "registration_type"
-    t.datetime "created_at",                                       :null => false
-    t.datetime "updated_at",                                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",                     :default => 0
     t.integer  "datasource_id"
     t.integer  "datasource_dbid"
@@ -411,8 +457,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
 
   create_table "pending_publication_items", :force => true do |t|
     t.integer  "programme_item_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
   end
 
@@ -421,8 +467,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "last_name",              :default => ""
     t.string   "suffix",                 :default => ""
     t.string   "language",               :default => ""
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",           :default => 0
     t.integer  "invitestatus_id"
     t.integer  "invitation_category_id"
@@ -437,15 +483,24 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "person_id"
     t.integer  "datasource_id"
     t.integer  "datasource_dbid"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "person_constraints", :force => true do |t|
+    t.integer  "max_items_per_day"
+    t.integer  "max_items_per_con"
+    t.integer  "person_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "lock_version",      :default => 0
   end
 
   create_table "person_mailing_assignments", :force => true do |t|
     t.integer  "person_id"
     t.integer  "mailing_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -455,8 +510,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "phone_numbers", :force => true do |t|
     t.string   "number",        :default => ""
     t.integer  "phone_type_id"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",  :default => 0
   end
 
@@ -470,22 +525,22 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "country"
     t.string   "phone"
     t.boolean  "isdefault"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
   create_table "preferences", :force => true do |t|
     t.integer  "user_id"
     t.boolean  "receive_messages"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "programme_item_assignments", :force => true do |t|
     t.integer  "person_id"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "role_id"
     t.integer  "programme_item_id"
@@ -504,8 +559,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "maximum_people"
     t.text     "notes"
     t.boolean  "print"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",         :default => 0
     t.integer  "format_id"
     t.integer  "setup_type_id"
@@ -520,8 +575,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "last_name",    :default => ""
     t.string   "suffix",       :default => ""
     t.integer  "person_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -529,8 +584,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
 
   create_table "publication_dates", :force => true do |t|
     t.datetime "timestamp"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "newitems",      :default => 0
     t.integer  "modifieditems", :default => 0
     t.integer  "removeditems",  :default => 0
@@ -543,8 +598,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "original_type"
     t.integer  "user_id"
     t.datetime "publication_date"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
   end
 
@@ -553,8 +608,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
 
   create_table "published_programme_item_assignments", :force => true do |t|
     t.integer  "published_programme_item_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",                :default => 0
     t.integer  "role_id"
     t.integer  "person_id"
@@ -569,8 +624,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "title"
     t.text     "precis"
     t.integer  "duration"
-    t.datetime "created_at",                          :null => false
-    t.datetime "updated_at",                          :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",         :default => 0
     t.integer  "format_id"
     t.integer  "pub_reference_number"
@@ -584,8 +639,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "published_programme_item_id"
     t.integer  "published_time_slot_id"
     t.integer  "day",                         :default => -1
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",                :default => 0
   end
 
@@ -596,23 +651,23 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "published_rooms", :force => true do |t|
     t.integer  "published_venue_id"
     t.text     "name"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
   end
 
   create_table "published_time_slots", :force => true do |t|
     t.datetime "start"
     t.datetime "end"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
   create_table "published_venues", :force => true do |t|
     t.text     "name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -622,8 +677,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "registration_type"
     t.boolean  "registered"
     t.boolean  "ghost"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",        :default => 0
   end
 
@@ -632,16 +687,16 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "relatable_type"
     t.integer  "person_id"
     t.string   "relationship_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
   end
 
   create_table "role_assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -653,8 +708,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "room_id"
     t.integer  "programme_item_id"
     t.integer  "time_slot_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "day",               :default => -1
   end
@@ -668,16 +723,16 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "room_id"
     t.integer  "setup_type_id"
     t.integer  "capacity"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",  :default => 0
   end
 
   create_table "rooms", :force => true do |t|
     t.integer  "venue_id"
     t.text     "name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
     t.string   "purpose"
     t.string   "comment"
@@ -697,8 +752,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   create_table "setup_types", :force => true do |t|
     t.string   "name"
     t.string   "description"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -714,11 +769,33 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "number_of_days",   :default => 1
   end
 
+  create_table "smerf_forms", :force => true do |t|
+    t.string   "name",                           :null => false
+    t.string   "code",                           :null => false
+    t.integer  "active",                         :null => false
+    t.text     "cache",      :limit => 16777215
+    t.datetime "cache_date"
+  end
+
+  add_index "smerf_forms", ["code"], :name => "index_smerf_forms_on_code", :unique => true
+
+  create_table "smerf_forms_surveyrespondents", :force => true do |t|
+    t.integer "surveyrespondent_id", :null => false
+    t.integer "smerf_form_id",       :null => false
+    t.text    "responses",           :null => false
+  end
+
+  create_table "smerf_responses", :force => true do |t|
+    t.integer "smerf_forms_surveyrespondent_id", :null => false
+    t.string  "question_code",                   :null => false
+    t.text    "response",                        :null => false
+  end
+
   create_table "survey_answers", :force => true do |t|
     t.text     "answer"
     t.boolean  "default",            :default => false
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
     t.integer  "survey_question_id"
     t.integer  "sort_order"
@@ -730,8 +807,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
   end
 
   create_table "survey_assignments", :force => true do |t|
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
     t.integer  "person_id"
     t.integer  "survey_response_id"
@@ -745,8 +822,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.boolean  "addressCopied",        :default => false
     t.boolean  "phoneCopied",          :default => false
     t.boolean  "emailCopied",          :default => false
-    t.datetime "created_at",                              :null => false
-    t.datetime "updated_at",                              :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",         :default => 0
     t.boolean  "tagsCopied",           :default => false
     t.boolean  "availableDatesCopied", :default => false
@@ -758,8 +835,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "description_style", :default => ""
     t.string   "answer_style",      :default => ""
     t.string   "question_style",    :default => ""
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.integer  "formatable_id"
     t.string   "formatable_type"
@@ -776,12 +853,14 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "name",         :default => ""
     t.string   "altname",      :default => ""
     t.text     "description"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
     t.integer  "survey_id"
     t.integer  "sort_order"
   end
+
+  add_index "survey_groups", ["survey_id"], :name => "survey_grp_survey_idx"
 
   create_table "survey_histories", :force => true do |t|
     t.integer  "survey_respondent_detail_id"
@@ -797,8 +876,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.integer  "survey_id"
     t.boolean  "shared"
     t.integer  "user_id"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
     t.boolean  "date_order",   :default => false
     t.boolean  "show_country", :default => false
@@ -809,8 +888,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "operation"
     t.string   "value"
     t.integer  "survey_query_id"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
   end
 
@@ -822,8 +901,8 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "question_type",      :default => "textfield"
     t.integer  "additional",         :default => 0
     t.string   "validation",         :default => ""
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
     t.integer  "survey_group_id"
     t.boolean  "mandatory",          :default => false
@@ -854,27 +933,31 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.string   "suffix",               :default => ""
     t.string   "email",                :default => ""
     t.integer  "survey_respondent_id"
-    t.datetime "created_at",                           :null => false
-    t.datetime "updated_at",                           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",         :default => 0
   end
+
+  add_index "survey_respondent_details", ["survey_respondent_id"], :name => "survey_resp_idx"
 
   create_table "survey_respondents", :force => true do |t|
     t.string   "key"
     t.string   "persistence_token",                      :null => false
     t.string   "single_access_token",                    :null => false
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "attending",           :default => true
     t.integer  "person_id"
     t.boolean  "submitted_survey",    :default => false
     t.integer  "email_status_id"
   end
 
+  add_index "survey_respondents", ["person_id"], :name => "survey_resp_person_idx"
+
   create_table "survey_responses", :force => true do |t|
     t.text     "response"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",                :default => 0
     t.integer  "survey_id"
     t.integer  "survey_question_id"
@@ -888,18 +971,22 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.boolean  "isbio"
   end
 
+  add_index "survey_responses", ["survey_id"], :name => "survey_idx"
+  add_index "survey_responses", ["survey_question_id"], :name => "survey_resp_question_idx"
+  add_index "survey_responses", ["survey_respondent_detail_id"], :name => "survey_resp_detail_idx"
+
   create_table "survey_sub_questions", :force => true do |t|
     t.boolean  "first",              :default => false
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",       :default => 0
     t.integer  "survey_question_id"
     t.integer  "survey_answer_id"
   end
 
   create_table "surveys", :force => true do |t|
-    t.datetime "created_at",                            :null => false
-    t.datetime "updated_at",                            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",      :default => 0
     t.string   "name"
     t.text     "welcome"
@@ -916,10 +1003,12 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.text     "authenticate_msg"
   end
 
+  add_index "surveys", ["alias"], :name => "survey_alias_idx"
+
   create_table "tag_contexts", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -933,19 +1022,21 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], :name => "index_taggings_on_taggable_id_and_taggable_type_and_context"
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
 
   create_table "tags", :force => true do |t|
-    t.string "name"
+    t.string  "name"
+    t.integer "taggings_count", :default => 0
   end
+
+  add_index "tags", ["name"], :name => "index_tags_on_name", :unique => true
 
   create_table "time_slots", :force => true do |t|
     t.datetime "start"
     t.datetime "end"
     t.string   "type"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
@@ -983,15 +1074,15 @@ ActiveRecord::Schema.define(:version => 20140314200859) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "person_id"
   end
 
   create_table "venues", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version", :default => 0
   end
 
