@@ -1,20 +1,6 @@
 GIT
-  remote: git://github.com/balen/enumerations_mixin.git
-  revision: ea07c9f01ac3783c407a93ee46fb417865c0aaac
-  specs:
-    enumerations_mixin (0.2.5)
-      rails (>= 3.2.0)
-
-GIT
-  remote: git://github.com/svenfuchs/i18n-active_record.git
-  revision: 4628202f676aecfbc00d404342e61f75078d9439
-  tag: rails-3.2
-  specs:
-    i18n-active_record (0.0.2)
-      i18n (>= 0.6.0)
-
-PATH
-  remote: /Users/balen/Projects/planner-core
+  remote: git://git.code.sf.net/p/conferenceplan/planner-core
+  revision: 372ad5fa249ed1c8e1fdad6389c95615474e2513
   specs:
     planner-core (0.0.1)
       actionmailer
@@ -59,6 +45,21 @@ PATH
       turbolinks
       will_paginate
       yajl-ruby
+
+GIT
+  remote: git://github.com/balen/enumerations_mixin.git
+  revision: ea07c9f01ac3783c407a93ee46fb417865c0aaac
+  specs:
+    enumerations_mixin (0.2.5)
+      rails (>= 3.2.0)
+
+GIT
+  remote: git://github.com/svenfuchs/i18n-active_record.git
+  revision: 4628202f676aecfbc00d404342e61f75078d9439
+  tag: rails-3.2
+  specs:
+    i18n-active_record (0.0.2)
+      i18n (>= 0.6.0)
 
 GEM
   remote: https://rubygems.org/
