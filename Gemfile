@@ -22,6 +22,8 @@ gem 'enumerations_mixin', :git => 'git://github.com/balen/enumerations_mixin.git
 # gem 'flamegraph'
 # gem 'memory_profiler'
 
+gem 'sidekiq'
+
 gem 'i18n-active_record',
       :git => 'git://github.com/svenfuchs/i18n-active_record.git',
       :tag => 'rails-3.2',
@@ -30,9 +32,12 @@ gem 'interpret'
 
 # For locale in the route
 # gem 'routing-filter'
+gem "daemons"
+gem 'delayed_job' 
+gem 'delayed_job_active_record'
 
 gem 'planner-core', :git => 'git://git.code.sf.net/p/conferenceplan/planner-core'
-#path: "/Users/balen/Projects/planner-core"
+#gem 'planner-core', path: "/Users/balen/Projects/planner-core"
 
 # Needed for the new asset pipeline
 group :assets do

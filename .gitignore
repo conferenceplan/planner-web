@@ -36,6 +36,7 @@ config/secrets.yml
 .DS_Store
 .svn
 .project
+.secret
 config/database.yml
 log/**/*
 tmp/**/*
