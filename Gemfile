@@ -52,6 +52,4 @@ group :development do
   # bundler requires these gems in development
   # gem 'ruby-debug-ide'
   gem 'seed_dump', '0.5.3'
-  gem 'capistrano', '2.15.5'
-  gem 'rvm-capistrano', '1.5.0'
 end
