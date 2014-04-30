@@ -1,6 +1,6 @@
 GIT
   remote: git://git.code.sf.net/p/conferenceplan/planner-core
-  revision: 282668a4a35a17d8accea059f573c25c2512f23c
+  revision: 7e1a0b87da9e4fab8cb2972447ccd3adefc442cc
   specs:
     planner-core (0.0.1)
       actionmailer
