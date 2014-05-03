@@ -1,8 +1,8 @@
 GIT
   remote: git://git.code.sf.net/p/conferenceplan/planner-core
-  revision: 7e1a0b87da9e4fab8cb2972447ccd3adefc442cc
+  revision: c4ab7245c9dede1cb0491c2c817bd831558375e2
   specs:
-    planner-core (0.0.1)
+    planner-core (0.1.0)
       actionmailer
       activerecord
       acts-as-taggable-on
@@ -192,7 +192,7 @@ GEM
       lazyhash (>= 0.1.1)
       rails (~> 3.1)
       ya2yaml (>= 0.30.0)
-    jbuilder (2.0.6)
+    jbuilder (2.0.7)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     journey (1.0.4)
@@ -540,7 +540,7 @@ DEPENDENCIES
   i18n-active_record!
   interpret
   newrelic_rpm
-  planner-core!
+  planner-core (>= 0.1)!
   puma
   racc (= 1.4.9)
   rack (= 1.4.5)

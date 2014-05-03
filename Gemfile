@@ -36,7 +36,7 @@ gem "daemons"
 gem 'delayed_job' 
 gem 'delayed_job_active_record'
 
-gem 'planner-core', :git => 'git://git.code.sf.net/p/conferenceplan/planner-core'
+gem 'planner-core', '>=0.1', :git => 'git://git.code.sf.net/p/conferenceplan/planner-core'
 #gem 'planner-core', path: "/Users/balen/Projects/planner-core"
 
 # Needed for the new asset pipeline
