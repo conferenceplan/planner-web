@@ -97,6 +97,7 @@ authorization do
     has_permission_on :communications_mail_templates, :to => :read
     has_permission_on :surveys, :to => :read
     has_permission_on :communications_mailing, :to => :manage
+    has_permission_on :items_confict_exceptions, :to => :manage
   end
   
   role :SuperPlanner do
