@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140419154915) do
+ActiveRecord::Schema.define(:version => 20140804171501) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -109,6 +109,35 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
     t.integer  "lock_version", :default => 0
+  end
+
+  create_table "conflict_exceptions", :force => true do |t|
+    t.string   "conflict_type"
+    t.integer  "affected"
+    t.integer  "src1"
+    t.integer  "src2"
+    t.integer  "idx",           :limit => 8
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.integer  "lock_version",               :default => 0
+  end
+
+  create_table "content_images", :force => true do |t|
+    t.string   "picture"
+    t.string   "gallery"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
+  end
+
+  add_index "content_images", ["gallery"], :name => "index_content_images_on_gallery"
+
+  create_table "customer_addresses", :force => true do |t|
+    t.integer  "customer_id"
+    t.integer  "postal_address_id"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "lock_version",      :default => 0
   end
 
   create_table "datasources", :force => true do |t|
@@ -315,6 +344,7 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.datetime "updated_at"
     t.string   "info"
     t.string   "test_email"
+    t.string   "reply_to"
   end
 
   create_table "mail_histories", :force => true do |t|
@@ -390,9 +420,11 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.integer  "position"
     t.string   "url"
     t.string   "title"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "lock_version", :default => 0
+    t.boolean  "use_url",      :default => true
+    t.text     "content"
   end
 
   create_table "mobile_themes", :force => true do |t|
@@ -432,27 +464,32 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
   end
 
   create_table "pending_import_people", :force => true do |t|
-    t.string   "first_name",                       :default => ""
-    t.string   "last_name",                        :default => ""
-    t.string   "suffix",                           :default => ""
+    t.string   "first_name",          :default => ""
+    t.string   "last_name",           :default => ""
+    t.string   "suffix",              :default => ""
     t.string   "line1"
     t.string   "line2"
     t.string   "line3"
     t.string   "city"
     t.string   "state"
     t.string   "postcode"
-    t.string   "country",             :limit => 2
+    t.string   "country"
     t.string   "phone"
-    t.string   "email",                            :default => ""
+    t.string   "email",               :default => ""
     t.string   "registration_number"
     t.string   "registration_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "lock_version",                     :default => 0
+    t.integer  "lock_version",        :default => 0
     t.integer  "datasource_id"
     t.integer  "datasource_dbid"
     t.integer  "pendingtype_id"
     t.text     "alt_email"
+    t.string   "pub_first_name"
+    t.string   "pub_last_name"
+    t.string   "pub_suffix"
+    t.string   "company"
+    t.string   "job_title"
   end
 
   create_table "pending_publication_items", :force => true do |t|
@@ -515,6 +552,52 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.integer  "lock_version",  :default => 0
   end
 
+  create_table "planner_help_page_help_translations", :force => true do |t|
+    t.integer  "planner_help_page_help_id"
+    t.string   "locale",                    :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.string   "title"
+    t.text     "text"
+  end
+
+  add_index "planner_help_page_help_translations", ["locale"], :name => "index_b0af02e88965fb2be5f4bb7b374ef3de3da989c2"
+  add_index "planner_help_page_help_translations", ["planner_help_page_help_id"], :name => "index_d57b177f2a924a0dbd7aa20f8bc7215ec8f7a510"
+
+  create_table "planner_help_page_helps", :force => true do |t|
+    t.string   "title"
+    t.text     "text"
+    t.string   "page"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
+  end
+
+  add_index "planner_help_page_helps", ["page"], :name => "index_planner_help_page_helps_on_page"
+
+  create_table "planner_konopas_konopas_configs", :force => true do |t|
+    t.string   "base_url"
+    t.string   "manifest_url"
+    t.string   "manifest_user"
+    t.string   "manifest_password"
+    t.string   "calendar_url"
+    t.string   "calendar_user"
+    t.string   "calendar_password"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.integer  "lock_version",      :default => 0
+  end
+
+  create_table "planner_mobile_mobile_content_images", :force => true do |t|
+    t.string   "gallery"
+    t.string   "picture"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
+  end
+
+  add_index "planner_mobile_mobile_content_images", ["gallery"], :name => "index_planner_mobile_mobile_content_images_on_gallery"
+
   create_table "postal_addresses", :force => true do |t|
     t.string   "line1"
     t.string   "line2"
@@ -568,6 +651,7 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.integer  "mobile_card_size",     :default => 1
     t.integer  "audience_size"
     t.text     "participant_notes"
+    t.text     "short_precis"
   end
 
   create_table "pseudonyms", :force => true do |t|
@@ -589,6 +673,14 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.integer  "newitems",      :default => 0
     t.integer  "modifieditems", :default => 0
     t.integer  "removeditems",  :default => 0
+  end
+
+  create_table "publication_statuses", :force => true do |t|
+    t.string   "status"
+    t.datetime "submit_time"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "lock_version", :default => 0
   end
 
   create_table "publications", :force => true do |t|
@@ -760,35 +852,13 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
   create_table "site_configs", :force => true do |t|
     t.string   "captcha_pub_key",  :default => ""
     t.string   "captcha_priv_key", :default => ""
-    t.datetime "created_at",                                                 :null => false
-    t.datetime "updated_at",                                                 :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "lock_version",     :default => 0
     t.string   "name",             :default => ""
     t.string   "time_zone",        :default => "Eastern Time (US & Canada)"
     t.datetime "start_date"
     t.integer  "number_of_days",   :default => 1
-  end
-
-  create_table "smerf_forms", :force => true do |t|
-    t.string   "name",                           :null => false
-    t.string   "code",                           :null => false
-    t.integer  "active",                         :null => false
-    t.text     "cache",      :limit => 16777215
-    t.datetime "cache_date"
-  end
-
-  add_index "smerf_forms", ["code"], :name => "index_smerf_forms_on_code", :unique => true
-
-  create_table "smerf_forms_surveyrespondents", :force => true do |t|
-    t.integer "surveyrespondent_id", :null => false
-    t.integer "smerf_form_id",       :null => false
-    t.text    "responses",           :null => false
-  end
-
-  create_table "smerf_responses", :force => true do |t|
-    t.integer "smerf_forms_surveyrespondent_id", :null => false
-    t.string  "question_code",                   :null => false
-    t.text    "response",                        :null => false
   end
 
   create_table "survey_answers", :force => true do |t|
@@ -923,8 +993,8 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
     t.text     "question6"
     t.boolean  "isbio"
     t.integer  "questionmapping_id"
-    t.boolean  "horizontal",         :default => false
     t.boolean  "private",            :default => false
+    t.boolean  "horizontal",         :default => false
   end
 
   create_table "survey_respondent_details", :force => true do |t|
@@ -942,14 +1012,13 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
 
   create_table "survey_respondents", :force => true do |t|
     t.string   "key"
-    t.string   "persistence_token",                      :null => false
-    t.string   "single_access_token",                    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "attending",           :default => true
     t.integer  "person_id"
     t.boolean  "submitted_survey",    :default => false
     t.integer  "email_status_id"
+    t.string   "single_access_token"
   end
 
   add_index "survey_respondents", ["person_id"], :name => "survey_resp_person_idx"
@@ -1023,6 +1092,7 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], :name => "taggings_idx", :unique => true
+  add_index "taggings", ["taggable_id"], :name => "index_taggings_on_taggable_id"
 
   create_table "tags", :force => true do |t|
     t.string  "name"
@@ -1061,23 +1131,37 @@ ActiveRecord::Schema.define(:version => 20140419154915) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login",                              :null => false
-    t.string   "crypted_password",                   :null => false
-    t.string   "password_salt",                      :null => false
-    t.string   "persistence_token",                  :null => false
-    t.string   "single_access_token",                :null => false
-    t.string   "perishable_token",                   :null => false
-    t.integer  "login_count",         :default => 0, :null => false
-    t.integer  "failed_login_count",  :default => 0, :null => false
+    t.string   "login",                                  :null => false
+    t.string   "encrypted_password",                     :null => false
+    t.string   "password_salt"
+    t.string   "single_access_token"
+    t.integer  "sign_in_count",          :default => 0,  :null => false
+    t.integer  "failed_attempts",        :default => 0,  :null => false
     t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "person_id"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.string   "email",                  :default => "", :null => false
+    t.string   "remember_token"
+    t.datetime "remember_created_at"
+    t.string   "unlock_token"
+    t.datetime "locked_at"
   end
+
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["login"], :name => "index_users_on_login", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 
   create_table "venues", :force => true do |t|
     t.string   "name"
