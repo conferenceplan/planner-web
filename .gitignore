@@ -41,3 +41,4 @@ config/database.yml
 log/**/*
 tmp/**/*
 
+config/application.yml

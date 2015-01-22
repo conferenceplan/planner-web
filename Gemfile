@@ -10,7 +10,7 @@ gem 'puma'
 gem 'turbo-sprockets-rails3'
 
 gem 'nokogiri', '1.6.2.1'
-gem 'bootstrap-sass', '3.2.0.0' #'~> 3.1'
+gem 'bootstrap-sass', '3.1.1.0' #'~> 3.1'
 
 gem 'activerecord-jdbcmysql-adapter', platform: :jruby
 gem "mysql2", platforms: [:rbx, :mri]  #, '= 0.3.15' # cause there is an issue with 0.3.16
