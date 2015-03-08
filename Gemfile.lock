@@ -1,8 +1,8 @@
 GIT
   remote: git://git.code.sf.net/p/conferenceplan/planner-core
-  revision: c09e0e14fc8e5d18cc6469cf0b3d7852ef0bbb89
+  revision: bf37979489951d8e936e719e3b76ed9d170ce5b4
   specs:
-    planner-core (0.5.19)
+    planner-core (0.5.95)
       actionmailer
       activerecord
       acts-as-taggable-on (= 3.1.1)
@@ -50,9 +50,9 @@ GIT
 
 GIT
   remote: git://git.code.sf.net/p/conferenceplan/planner_konopas
-  revision: 743e297dcbe11b813c1c990bd2af4d924db2e8b7
+  revision: 86ba3ddf70ec76c4f9ce3c19ec0c47cd993d821e
   specs:
-    planner_konopas (0.2.3)
+    planner_konopas (0.2.6)
       devise
       globalize (~> 3.1.0)
       planner-core
@@ -120,7 +120,7 @@ GEM
     axlsx_rails (0.3.0)
       axlsx (>= 2.0.1)
       rails (>= 3.1)
-    bcrypt (3.1.9)
+    bcrypt (3.1.10)
     best_in_place (2.1.0)
       jquery-rails
       rails (~> 3.1)
@@ -140,10 +140,10 @@ GEM
       actionpack (>= 3.0)
       railties (>= 3.0)
       uber (~> 0.0.8)
-    chunky_png (1.3.3)
+    chunky_png (1.3.4)
     ckeditor_rails (4.4.6)
       railties (>= 3.0)
-    cloudinary (1.0.81)
+    cloudinary (1.0.82)
       aws_cf_signer
       rest-client
     coffee-rails (3.2.2)
@@ -152,7 +152,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.8.0)
+    coffee-script-source (1.9.1)
     compass (1.0.3)
       chunky_png (~> 1.2)
       compass-core (~> 1.0.2)
@@ -169,8 +169,8 @@ GEM
       compass (~> 1.0.0)
       sass-rails (<= 5.0.1)
       sprockets (< 2.13)
-    connection_pool (2.1.1)
-    d3_rails (3.5.3)
+    connection_pool (2.1.2)
+    d3_rails (3.5.5)
       railties (>= 3.1.0)
     daemons (1.1.9)
     dalli (2.7.2)
@@ -193,13 +193,13 @@ GEM
     encoding_sampler (0.3.1)
       diff-lcs (~> 1.1)
     erubis (2.7.0)
-    execjs (2.2.2)
+    execjs (2.4.0)
     ffi (1.9.6)
     ffi-compiler (0.1.3)
       ffi (>= 1.0.0)
       rake
     ffi2-generators (0.1.1)
-    figaro (1.0.0)
+    figaro (1.1.0)
       thor (~> 0.14)
     font_assets (0.1.11)
       rack
@@ -218,7 +218,7 @@ GEM
       lazyhash (>= 0.1.1)
       rails (~> 3.1)
       ya2yaml (>= 0.30.0)
-    jbuilder (2.2.6)
+    jbuilder (2.2.10)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
     journey (1.0.4)
@@ -245,23 +245,23 @@ GEM
     mini_portile (0.6.0)
     momentjs-rails (2.5.1)
       railties (>= 3.1)
-    multi_json (1.10.1)
-    mysql2 (0.3.17)
-    netrc (0.10.2)
+    multi_json (1.11.0)
+    mysql2 (0.3.18)
+    netrc (0.10.3)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
-    pdf-core (0.4.0)
+    pdf-core (0.5.0)
     polyglot (0.3.5)
-    power_assert (0.2.2)
-    prawn (1.3.0)
-      pdf-core (~> 0.4.0)
+    power_assert (0.2.3)
+    prawn (2.0.0)
+      pdf-core (~> 0.5.0)
       ttfunk (~> 1.4.0)
     prawn-table (0.2.1)
     prawn_rails (0.0.11)
       prawn (>= 0.11.1)
       railties (>= 3.0.0)
-    puma (2.11.0)
+    puma (2.11.1)
       rack (>= 1.1, < 2.0)
     racc (1.4.9)
     rack (1.4.5)
@@ -298,11 +298,11 @@ GEM
     ref (1.0.5)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rest-client (1.7.2)
+    rest-client (1.7.3)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    routing-filter (0.3.1)
-      actionpack
+    routing-filter (0.4.0.1)
+      actionpack (< 4.2)
     rubysl (2.1.0)
       rubysl-abbrev (~> 2.0)
       rubysl-base64 (~> 2.0)
@@ -407,7 +407,7 @@ GEM
     rubysl-csv (2.0.2)
       rubysl-english (~> 2.0)
     rubysl-curses (2.0.1)
-    rubysl-date (2.0.8)
+    rubysl-date (2.0.9)
     rubysl-delegate (2.0.1)
     rubysl-digest (2.0.3)
     rubysl-drb (2.0.1)
@@ -471,7 +471,7 @@ GEM
     rubysl-pstore (2.0.0)
     rubysl-pty (2.0.3)
     rubysl-rational (2.0.1)
-    rubysl-resolv (2.1.0)
+    rubysl-resolv (2.1.2)
     rubysl-rexml (2.0.4)
     rubysl-rinda (2.0.1)
     rubysl-rss (2.0.0)
@@ -487,7 +487,7 @@ GEM
     rubysl-syslog (2.1.0)
       ffi2-generators (~> 0.1)
     rubysl-tempfile (2.0.1)
-    rubysl-thread (2.0.2)
+    rubysl-thread (2.0.3)
     rubysl-thwait (2.0.0)
     rubysl-time (2.0.3)
     rubysl-timeout (2.0.0)
@@ -503,7 +503,7 @@ GEM
     rubysl-yaml (2.1.0)
     rubysl-zlib (2.0.1)
     rubyzip (1.0.0)
-    sass (3.4.10)
+    sass (3.4.13)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
@@ -512,7 +512,7 @@ GEM
       ffi-compiler (>= 0.0.2)
       rake
     seed_dump (0.5.3)
-    select2-rails (3.5.9.2)
+    select2-rails (3.5.9.3)
       thor (~> 0.14)
     sprockets (2.2.3)
       hike (~> 1.2)
@@ -543,7 +543,7 @@ GEM
       actionpack (>= 3.1)
       jquery-rails
       railties (>= 3.1)
-    tzinfo (0.3.42)
+    tzinfo (0.3.43)
     uber (0.0.13)
     uglifier (2.5.1)
       execjs (>= 0.3.0)
