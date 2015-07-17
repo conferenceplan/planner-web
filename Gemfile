@@ -40,8 +40,8 @@ gem 'delayed_job_active_record'
 
 gem "figaro"
 
-gem 'planner-core',     '>=0.1', :git => 'git://git.code.sf.net/p/conferenceplan/planner-core'
-gem 'planner_konopas',  '>=0.1', :git => 'git://git.code.sf.net/p/conferenceplan/planner_konopas'
+gem 'planner-core',     '>=0.1', :git => 'git@github.com:conferenceplan/planner-core.git'
+gem 'planner_konopas',  '>=0.1', :git => 'git@github.com:conferenceplan/planner_konopas.git'
 
 # gem 'planner-core', path: "/Users/balen/Projects/planner-core"
 # gem 'planner_konopas', path: "/Users/balen/Projects/planner_konopas"
