@@ -24,7 +24,7 @@ gem 'i18n-active_record',
       :require => 'i18n/active_record'
 
 group :staging, :development do
-  gem 'interpret', :git => 'git://github.com/davidakachaos/interpret.git'
+  gem 'interpret', :git => 'git://github.com/balen/interpret.git'
 end
 
 # For locale in the route
