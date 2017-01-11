@@ -8,8 +8,7 @@ GIT
 
 GIT
   remote: git@github.com:conferenceplan/planner-core.git
-  revision: 3f2e782162e1689478f59de1b13b16564768eb40
-  branch: upgrade/rails42
+  revision: a5e65e3edf6bd1c30af8408734fddf8e97fb8339
   specs:
     planner-core (1.3.0)
       actionmailer
@@ -65,8 +64,7 @@ GIT
 
 GIT
   remote: git@github.com:conferenceplan/planner_konopas.git
-  revision: 8f7fcc269ea7d7828893e306cd19e3a9e4510ec9
-  branch: upgrade/rails42
+  revision: 30e19c08a0fd2c84d74aad91b46e326826c11f77
   specs:
     planner_konopas (1.1.0)
       devise

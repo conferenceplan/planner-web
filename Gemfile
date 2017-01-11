@@ -30,8 +30,8 @@ end
 # gem 'planner-core', path: "../planner-core"
 # gem 'planner_konopas', path: "../planner_konopas"
 
-gem 'planner-core',     '>=0.1', :git => 'git@github.com:conferenceplan/planner-core.git', :branch => 'upgrade/rails42'
-gem 'planner_konopas',  '>=0.1', :git => 'git@github.com:conferenceplan/planner_konopas.git', :branch => 'upgrade/rails42'
+gem 'planner-core',     '>=0.1', :git => 'git@github.com:conferenceplan/planner-core.git'
+gem 'planner_konopas',  '>=0.1', :git => 'git@github.com:conferenceplan/planner_konopas.git'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
